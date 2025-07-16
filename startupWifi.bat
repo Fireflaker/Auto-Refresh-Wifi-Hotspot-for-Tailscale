@@ -1,0 +1,1 @@
+python "C:\wifi.py" start
