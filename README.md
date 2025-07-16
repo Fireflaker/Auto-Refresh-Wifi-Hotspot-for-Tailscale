@@ -3,8 +3,11 @@ Python script
 Uses MyPublicWifi.exe to route internet to share wifi with a truenas server running tailscale - so we can share wifi internet connection and more, Checks for wifi disconnection and if the tailscale node is actually alive online
 
 Key note: must give API key, not auth key.
+Must run as admin or the exe app cant start unattended. Search and download the exe yourself. 
+the mypublicwifi app must be set to auto start hotspot, ect.
+Idealy much run at boot. And no human can click the yes to admin button. So it must be setup as a scheduled task. Ask AI for help.
 
-
+```
 example:
 ========== WiFi Monitor Menu ==========
 1. Start monitoring connection
@@ -115,4 +118,4 @@ If Tailscale is online, clients can reach internet!
 
 Minutes later, all up and running.
 
-
+```
