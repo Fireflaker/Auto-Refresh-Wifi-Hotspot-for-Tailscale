@@ -29,6 +29,7 @@ EMAIL_TO = "urma@gmail.com"
 EMAIL_PASS = "aaaa cccc xxxx pghi"
 MAX_FAIL_COUNT_BEFORE_REBOOT = 5
 
+
 # Global variable to store full diagnostic log
 diagnostic_log = []
 
@@ -441,6 +442,17 @@ def monitor(interface):
                 time.sleep(15)
                 if not check_ethernet():
                     send_email("❌ Critical", "LAN issue persists after restart.")
+
+            # ✅ NEW: Check tailscale availability via full test
+            if not check_tailscale_comprehensive():
+                log_message("❌ Tailscale test failed — restarting MyPublicWiFi.")
+                send_email("❌ Tailscale Offline", "Comprehensive test failed. Restarting MyPublicWiFi.")
+                relaunch_mypublicwifi()
+                time.sleep(60)
+                # Optional: verify again
+                if not check_tailscale_comprehensive():
+                    send_email("⚠️ Tailscale still offline", "Even after restarting MyPublicWiFi.")
+
 
             if fail_count >= MAX_FAIL_COUNT_BEFORE_REBOOT:
                 log_message("❌ Too many failures. Reboot condition met.")
